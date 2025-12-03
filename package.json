@@ -1,19 +1,19 @@
 {
-  "name": "create-nodefold",
+  "name": "create-nodefolder",
   "version": "0.0.1",
   "type": "module",
   "bin": {
-    "create-nodefold": "bin/create-nodefold.js"
+    "create-nodefolder": "bin/create-nodefolder.js"
   },
   "files": [
     "bin",
     "template"
   ],
-  "keywords": ["scaffold", "node", "starter"],
+  "keywords": ["scaffolder", "nodejs", "starter"],
   "author": "developerbhanu",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/developerbhanu/create-nodefold.git"
+    "url": "git+https://github.com/developerbhanu/create-nodefolder.git"
   },
   "engines": {
     "node": ">=18"
