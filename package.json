@@ -1,0 +1,17 @@
+{
+  "name": "create-nodefold",
+  "version": "1.0.0",
+  "type": "module",
+  "bin": {
+    "create-nodefold": "bin/create-nodefold.js"
+  },
+  "files": [
+    "bin",
+    "template"
+  ],
+  "keywords": ["scaffold", "node", "starter", "esm"],
+  "engines": {
+    "node": ">=18"
+  }
+}
+
