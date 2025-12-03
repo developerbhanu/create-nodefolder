@@ -4,11 +4,11 @@ Nodefolder is short for nodejs scaffolder, that will scaffold a generic nodejs p
 
 ## How to generate:
 
-1. Navigate to your desired directory and type:
+1. use ` npm create nodefolder ` to create a new project.
 
-``` npm create nodefolder ```
+2. navigate to the created project: `cd <project-name>`.
 
-2. copy `.env.example` and create `.env` file and make changes as required.
+2. copy `.env.example` and create `.env` file and assign values as required.
 
 3.  run `npm install` to install dependencies.
 
