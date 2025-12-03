@@ -1,0 +1,9 @@
+node_modules/
+npm-debug.log
+.git
+package-lock.json
+
+# template cleanup
+template/node_modules/
+template/package-lock.json
+

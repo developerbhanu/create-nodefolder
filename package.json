@@ -1,6 +1,6 @@
 {
   "name": "create-nodefold",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "type": "module",
   "bin": {
     "create-nodefold": "bin/create-nodefold.js"
@@ -9,7 +9,12 @@
     "bin",
     "template"
   ],
-  "keywords": ["scaffold", "node", "starter", "esm"],
+  "keywords": ["scaffold", "node", "starter"],
+  "author": "developerbhanu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/developerbhanu/create-nodefold.git"
+  },
   "engines": {
     "node": ">=18"
   }

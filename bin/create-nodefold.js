@@ -7,64 +7,63 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const rl = readline.createInterface({
+const reader = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
 });
 
-function ask(question) {
-    return new Promise((resolve) => rl.question(question, resolve));
+const ask = (question) => {
+    return new Promise(
+        (resolve) => reader.question(question, resolve)
+    );
+}
+
+// Read package.json (the one at the root of your CLI package)
+const pkg = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "../package.json"), "utf8")
+);
+
+function copyRecursive(src, dest) {
+    const stats = fs.statSync(src);
+
+    if (stats.isDirectory()) {
+        fs.mkdirSync(dest, { recursive: true });
+        for (const file of fs.readdirSync(src)) {
+            const srcPath = path.join(src, file);
+            const destPath = path.join(dest, file);
+            copyRecursive(srcPath, destPath);
+        }
+    } else {
+        fs.copyFileSync(src, dest);
+    }
 }
 
 (async () => {
-    console.log("\n🟢 Welcome to Nodefold Project Generator!\n");
+    console.log('Welcome to nodefold: The Node Scaffolder');
+    console.log(`\nVersion: ${pkg.version}`)
 
-    const projectName = (await ask("Project name: ")).trim();
-    rl.close();
+    const projectName = (await ask("Project Name: ")).trim();
+    reader.close();
 
-    if (!projectName) {
-        console.error("❌ Project name is required.");
+    if(!projectName){
+        console.error("Project name is required.");
         process.exit(1);
     }
-
+    
     const originalCwd = process.env.INIT_CWD || process.cwd();
-    const targetDir = path.resolve(originalCwd, projectName);
-    const templateDir = path.join(__dirname, "../template");
+    const targetDir = path.join(originalCwd, projectName);
 
-    if (fs.existsSync(targetDir)) {
-        console.error("❌ Folder already exists.");
+    if (fs.existsSync(targetDir)){
+        console.error(`Folder "${projectName}" already exists`);
         process.exit(1);
     }
 
-    fs.mkdirSync(targetDir);
-    console.log(`\n📁 Creating project folder: ${projectName}`);
-    // Copy template files
-    function copyRecursive(src, dest) {
-        const stats = fs.statSync(src);
+    fs.mkdirSync(targetDir, { recursive: true });
+    console.log(`created directory: ${targetDir}`);
 
-        if (stats.isDirectory()) {
-            fs.mkdirSync(dest);
-            for (const file of fs.readdirSync(src)) {
-                const srcPath = path.join(src, file);
-                const destPath = path.join(dest, file);
-                copyRecursive(srcPath, destPath);
-            }
-        } else {
-            fs.copyFileSync(src, dest);
-        }
-    }
-
+    const templateDir = path.join(__dirname, "../template");
     copyRecursive(templateDir, targetDir);
 
-    console.log("📦 Project scaffold created!");
-    console.log(`
-Next steps:
-
-  cd ${projectName}
-  npm install
-  npm run start
-
-✨ Happy coding!
-`);
+    console.log("📦 Template copied successfully!");
 })();
 
