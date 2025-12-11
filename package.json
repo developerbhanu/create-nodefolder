@@ -1,6 +1,7 @@
 {
   "name": "create-nodefolder",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "create-nodefolder": "bin/create-nodefolder.js"
